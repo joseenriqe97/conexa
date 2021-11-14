@@ -15,7 +15,7 @@ const respondError = (logger, res, error, logData, html) => {
     .status(status)
     .send(
       html || {
-        message: error.toString() || "Server Not Found",
+        message: error.toString() || 'Server Not Found',
       },
     )
     .end();

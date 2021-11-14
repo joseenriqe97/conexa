@@ -104,10 +104,10 @@ export default defineComponent({
           })
           .catch((err) => {
             const { response } = err;
-            if (response.status === 400) {
+            if (response.status === 403) {
               showMessage("Clave Incorrecta", "warning");
             }
-            if (response.status === 409) {
+            if (response.status === 401) {
               showMessage(
                 "El correo no existe, intente crear un usuario.",
                 "error"

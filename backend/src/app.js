@@ -41,7 +41,6 @@ app.use('/health', (req, res) =>
   dbHealth() ? res.status(200).send({ status: 'UP' }) : res.status(422).send({ status: 'UNHEALTHY' }),
 );
 
-//TODO: ACTUALIZAR 
 app.use('/conexa-docs', serve, setup(swaggerDocument));
 
 // Routers
@@ -56,11 +55,9 @@ router.use((req, res, next) => {
 // Api
 app.use(
   '/api',
-  routesVersioning(
-    {
-      '1.0.0': v1_0,
-    },
-  ),
+  routesVersioning({
+    '1.0.0': v1_0,
+  }),
 );
 
 // Blank page

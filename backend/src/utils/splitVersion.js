@@ -3,7 +3,7 @@
 import { AVAILABLE_VERSIONS } from '../config/constants';
 
 const splitVersion = (requestVersion) => {
-  let versionSplited = null;  
+  let versionSplited = null;
   const validVersion = AVAILABLE_VERSIONS.some((version) => {
     return version === requestVersion;
   });

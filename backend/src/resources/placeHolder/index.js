@@ -1,2 +1,2 @@
 export * from './getPhoto';
-export  * from './getPost';
+export * from './getPost';

@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory, NavigationGuardNext, RouteLocationNormalized, RouteRecordRaw } from "vue-router";
+import { createRouter, createWebHistory } from "vue-router";
 import Login from '../pages/Login.vue';
 import View from '../pages/ViewPlaceHolder/viewPlaceHolder.vue';
 
