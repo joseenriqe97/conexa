@@ -1,0 +1,25 @@
+{
+  "name": "front-conexa",
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc --noEmit && vite build",
+    "serve": "vite preview"
+  },
+  "dependencies": {
+    "@element-plus/icons": "0.0.11",
+    "@hennge/vue3-pagination": "^1.0.17",
+    "axios": "^0.24.0",
+    "element-plus": "^1.0.2-beta.70",
+    "vue": "^3.0.5",
+    "vue-router": "^4.0.3",
+    "vue-sliding-pagination": "^1.3.2"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^1.3.0",
+    "@vue/compiler-sfc": "^3.0.5",
+    "typescript": "^4.3.2",
+    "vite": "^2.4.4",
+    "vue-tsc": "^0.2.2"
+  }
+}

@@ -1,0 +1,261 @@
+{
+	"openapi": "3.0.0",
+	"info": {
+		"version": "1.0.0",
+		"title": "Conexa API",
+		"description": "Conexa API",
+		"license": {
+			"name": "ISC",
+			"url": "https://opensource.org/licenses/ISC"
+		}
+	},
+	"tags": [
+		{
+			"name": "Conexa API"
+		}
+	],
+	"consumes": [
+		"application/json"
+	],
+	"produces": [
+		"application/json"
+	],
+	"servers": [
+		{
+			"url": "/",
+			"description": "Local Dev"
+		}
+	],
+	"paths": {
+		"/api/placeholder/post": {
+			"get": {
+				"tags": [
+					"Conexa API"
+				],
+				"summary": "POST all post placeHolder",
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"$ref": "#components/schemas/ResponsePost"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/placeholder/photo": {
+			"get": {
+				"tags": [
+					"Conexa API"
+				],
+				"summary": "Get all photo placeHolder",
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"$ref": "#components/schemas/ResponsePhoto"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"api/user/auth": {
+			"post": {
+				"tags": [
+					"Conexa API"
+				],
+				"summary": "User authentication.",
+				"requestBody": {
+					"description": "authentication",
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"$ref": "#components/schemas/RequestLogin"
+							}
+						}
+					}
+				},
+				"produces": [
+					"application/json"
+				],
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"$ref": "#components/schemas/ResponseAuth"
+								}
+							}
+						}
+					},
+					"401": {
+						"description": "User does not exist"
+					},
+					"403": {
+						"description": "Invalid Credentials"
+					},
+					"422": {
+						"description": "Failed. Bad post data."
+					}
+				}
+			}
+		},
+		"api/user/": {
+			"post": {
+				"tags": [
+					"Conexa API"
+				],
+				"summary": "Create user.",
+				"requestBody": {
+					"description": "creation",
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"$ref": "#components/schemas/RequestLogin"
+							}
+						}
+					}
+				},
+				"produces": [
+					"application/json"
+				],
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"$ref": "#components/schemas/ResponseAuth"
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Failed. Bad post data."
+					}
+				}
+			}
+		}
+	},
+	"components": {
+		"schemas": {
+			"RequestLogin": {
+				"type": "object",
+				"properties": {
+					"email": {
+						"type": "string",
+						"example": "user@gmail.com"
+					},
+					"password": {
+						"type": "string"
+					}
+				}
+			},
+			"ResponseAuth": {
+				"type": "object",
+				"properties": {
+					"message": {
+						"type": "string"
+					},
+					"data": {
+						"type": "object",
+						"properties": {
+							"_id": {
+								"type": "string"
+							},
+							"email": {
+								"type": "string"
+							},
+							"password": {
+								"type": "string"
+							},
+							"__v": {
+								"type": "integer",
+								"format": "int32"
+							},
+							"token": {
+								"type": "string"
+							}
+						}
+					}
+				}
+			},
+			"ResponsePhoto": {
+				"type": "object",
+				"properties": {
+					"message": {
+						"type": "string"
+					},
+					"data": {
+						"type": "array",
+						"items": {
+							"type": "object",
+							"properties": {
+								"albumId": {
+									"type": "integer",
+									"format": "int32"
+								},
+								"id": {
+									"type": "integer",
+									"format": "int32"
+								},
+								"title": {
+									"type": "string"
+								},
+								"url": {
+									"type": "string"
+								},
+								"thumbnailUrl": {
+									"type": "string"
+								}
+							}
+						}
+					}
+				}
+			},
+			"ResponsePost": {
+				"type": "object",
+				"properties": {
+					"message": {
+						"type": "string"
+					},
+					"data": {
+						"type": "array",
+						"items": {
+							"type": "object",
+							"properties": {
+								"userId": {
+									"type": "integer",
+									"format": "int32"
+								},
+								"id": {
+									"type": "integer",
+									"format": "int32"
+								},
+								"title": {
+									"type": "string"
+								},
+								"body": {
+									"type": "string"
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
