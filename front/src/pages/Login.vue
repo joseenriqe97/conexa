@@ -3,7 +3,12 @@
     <div class="PanelLogin">
       <div class="PaddingPanel">
         <div class="Column">
-          <img :src="urlImages" class="image" />
+          <div v-if="!isRegister">
+            <img :src="urlImages" class="image" />
+          </div>
+          <div v-if="isRegister">
+            <h2 class="ingresaText">Registrate :D</h2>
+          </div>
         </div>
 
         <div class="Column">
@@ -39,16 +44,39 @@
           style="display: flex; justify-content: center; align-items: center"
         >
           <el-row>
-            <!-- <el-col :span="6">
-              <div class="grid-content bg-purple">
-                <el-button type="text" @click="authenticate">Crear</el-button>
+            <el-col :span="12">
+              <div v-if="!isRegister" class="grid-content bg-purple">
+                <el-button
+                  type="primary"
+                  style="width: 250px"
+                  @click="authenticate"
+                  >Iniciar Sesion</el-button
+                >
               </div>
-            </el-col> -->
-
+              <div v-if="isRegister" class="grid-content bg-purple">
+                <el-button
+                  type="primary"
+                  style="width: 250px"
+                  @click="createUser"
+                  >Crear Usuario</el-button
+                >
+              </div>
+            </el-col>
+          </el-row>
+        </div>
+        <div
+          v-if="!isRegister"
+          class="Column"
+          style="display: flex; justify-content: center; align-items: center"
+        >
+          <el-row>
             <el-col :span="12">
               <div class="grid-content bg-purple">
-                <el-button type="primary" @click="authenticate"
-                  >Iniciar Sesion</el-button
+                <el-button
+                  type="success"
+                  style="width: 250px"
+                  @click="isRegister = true"
+                  >Crear cuenta nueva</el-button
                 >
               </div>
             </el-col>
@@ -61,12 +89,11 @@
 
 <script lang="ts">
 import { ElMessage } from "element-plus";
-
-import { computed, defineComponent, reactive, ref, toRefs } from "vue";
+import { computed, defineComponent, reactive, ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
-import { requestLogin, ResponseLogin } from "../model/user";
-import { authUser } from "../services/user";
 import { URL_IMAGES } from "../lib/client";
+import { requestLogin, ResponseLogin } from "../model/user";
+import { authUserService, createUserService } from "../services/user";
 
 //template for message type
 type typeMessage = "" | "success" | "warning" | "info" | "error" | undefined;
@@ -74,9 +101,11 @@ export default defineComponent({
   setup() {
     localStorage.removeItem("_token");
     //VARIABLES
-    const urlImages = ref<string>(URL_IMAGES);
+    const urlImages = ref<String>(URL_IMAGES);
+    const isRegister = ref<Boolean>(false);
     const route = useRoute();
     const router = useRouter();
+    const buttonString = ref<String>("Iniciar Sesion");
     const data = reactive<requestLogin>({
       email: "",
       password: "",
@@ -89,12 +118,11 @@ export default defineComponent({
         type: type,
       });
     };
-
     const authenticate = () => {
       if (!(data.email && data.password)) {
         showMessage("Disculpe, ingrese sus datos", "error");
       } else {
-        authUser(data)
+        authUserService(data)
           .then((res: ResponseLogin) => {
             const { data } = res.data;
             localStorage.setItem("_token", data.token);
@@ -116,16 +144,38 @@ export default defineComponent({
           });
       }
     };
+    const createUser = () => {
+      if (!(data.email && data.password)) {
+        showMessage("Disculpe, ingrese sus datos", "error");
+      } else {
+        createUserService(data)
+          .then(() => {
+            data.email = "";
+            data.password = "";
+            showMessage("Usuario registrado con exito.", "success");
+            setTimeout(() => {
+              isRegister.value = false;
+            }, 500);
+          })
+          .catch(() => {
+            buttonString.value = "Iniciar Sesion";
+            isRegister.value = false;
+            showMessage("Ha ocurrido un error, intente mas tarde.", "error");
+          });
+      }
+    };
 
     //HOOKS
     const isAuthorized = computed(() => route.meta?.noAuth);
 
     return {
+      createUser,
       data,
       authenticate,
       isAuthorized,
-      authUser,
       urlImages,
+      isRegister,
+      buttonString,
     };
   },
 });
@@ -134,7 +184,7 @@ export default defineComponent({
 <style scoped>
 .Panel {
   width: 565px;
-  height: 410px;
+  height: 430px;
   background-color: #fafafa;
   position: absolute;
   left: 50%;
