@@ -132,7 +132,7 @@ export default defineComponent({
               router.push({
                 path: "/view",
               });
-            }, 500);
+            }, 1000);
           })
           .catch((err) => {
             const { response } = err;
