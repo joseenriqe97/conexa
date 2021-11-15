@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const URL = "http://localhost:3003/api"
+const URL = "https://api-conexa.herokuapp.com/api"
 
 export const URL_IMAGES = "https://conexa.ai/wp-content/uploads/2021/03/logo.svg"
 
