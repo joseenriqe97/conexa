@@ -95,6 +95,7 @@ export default defineComponent({
       return result;
     };
     const getPostService = () => {
+      console.log(localStorage.getItem("_token"))
       loading.value = true;
 
       getPost().then((res: ResponsePost) => {

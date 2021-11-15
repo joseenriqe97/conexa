@@ -5,10 +5,19 @@ import { requestPhotos, ResponsePhotos, ResponsePost } from "../model/viewPlaceH
 
 export const getPost = (): Promise<ResponsePost> => {
   return httpPrivate
-    .get("post")
+    .get("post", {
+      headers: {
+        'token': localStorage.getItem('_token') as string
+      }
+    })
 }
 
 export const getPhoto = (params: requestPhotos): Promise<ResponsePhotos> => {
   return httpPrivate
-    .get("photo", { params })
+    .get("photo", {
+      params,
+      headers: {
+        'token': localStorage.getItem('_token') as string
+      }
+    })
 }
