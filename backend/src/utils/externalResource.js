@@ -10,10 +10,9 @@ export const getPostJsonPlaceHolder = async () => {
   }
 };
 
-//TODO:AGREGAR PAGINATION
-export const getPhotoJsonPlaceHolder = async (params) => {
+export const getPhotoJsonPlaceHolder = async () => {
   try {
-    const { data } = await httpClient.get(`${URL_PLACE_HOLDER}/photos`, { params });
+    const { data } = await httpClient.get(`${URL_PLACE_HOLDER}/photos`);
     return data;
   } catch (e) {
     throw new Error(e.toString());

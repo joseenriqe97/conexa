@@ -7,10 +7,7 @@ export const getPhoto = async (req, res) => {
   const { start, limit } = req.query;
   logger.debug('get photos resource');
   try {
-    const photosJsonPlaceHolder = await jsonPlaceHolderServices.getPhoto({
-      _start: start,
-      _limit: limit,
-    });
+    const photosJsonPlaceHolder = await jsonPlaceHolderServices.getPhoto();
     let responseData = {};
 
     responseData.message = 'success';

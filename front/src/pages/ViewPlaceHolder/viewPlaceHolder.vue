@@ -13,7 +13,7 @@
       <div class="contentCenter" v-if="isTablePost">
         <el-table
           v-loading="loading"
-          :data="itemsPager"
+          :data="itemsPagerPost"
           border
           style="width: 72%"
         >
@@ -26,7 +26,7 @@
       <div class="contentCenter" v-if="!isTablePost">
         <el-table
           v-loading="loading"
-          :data="photo.data"
+          :data="itemsPagerPhotos"
           border
           style="width: 72%"
         >
@@ -57,13 +57,7 @@
 <script lang="ts">
 import VPagination from "@hennge/vue3-pagination";
 import "@hennge/vue3-pagination/dist/vue3-pagination.css";
-import {
-  computed,
-  defineComponent,
-  onMounted,
-  ref,
-  watch
-} from "vue";
+import { computed, defineComponent, onMounted, ref, watch } from "vue";
 import { useRoute } from "vue-router";
 import { ResponsePhotos, ResponsePost } from "../../model/viewPlaceHolder";
 import { getPhoto, getPost } from "../../services/viePlaceHolder";
@@ -95,7 +89,7 @@ export default defineComponent({
       return result;
     };
     const getPostService = () => {
-      console.log(localStorage.getItem("_token"))
+      console.log(localStorage.getItem("_token"));
       loading.value = true;
 
       getPost().then((res: ResponsePost) => {
@@ -128,10 +122,18 @@ export default defineComponent({
       return 0;
     });
 
-    const itemsPager = computed(() => {
+    const itemsPagerPost = computed(() => {
       const indexPag = getItemsPaginations();
       if (posts.value.data && posts.value.data?.length > 0) {
         return posts.value.data.slice(indexPag["start"], indexPag["limit"]); //paginacion
+      }
+      return [];
+    });
+
+    const itemsPagerPhotos = computed(() => {
+      const indexPag = getItemsPaginations();
+      if (photo.value.data && photo.value.data?.length > 0) {
+        return photo.value.data.slice(indexPag["start"], indexPag["limit"]); //paginacion
       }
       return [];
     });
@@ -157,10 +159,11 @@ export default defineComponent({
       updateHandler,
       pageNum,
       totalPages,
-      itemsPager,
+      itemsPagerPost,
       getPhotoService,
       photo,
       isTablePost,
+      itemsPagerPhotos,
     };
   },
 });

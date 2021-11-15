@@ -4,10 +4,10 @@ import createError from 'http-errors';
 import logger from '../../logger';
 import { getPhotoJsonPlaceHolder } from '../../utils/externalResource';
 
-export const getPhoto = async (params) => {
+export const getPhoto = async () => {
   logger.debug('get photo service');
   try {
-    const response = await getPhotoJsonPlaceHolder(params);
+    const response = await getPhotoJsonPlaceHolder();
     return response;
   } catch (error) {
     logger.error(error);

@@ -14,7 +14,7 @@ const routes = [
     path: "/view",
     name: "view",
     component: View,
-    meta: { requiresAuth: true },//TODO: CAMBIAR A TRUE
+    meta: { requiresAuth: true },
   },
   {
     path: '/:pathMatch(.*)*',
