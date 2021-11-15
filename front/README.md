@@ -1,5 +1,25 @@
-# To run the project do the following
+## Steps to lift the service locally
 
-1. Run: `npm run i`
+Open a terminal and executes:
 
-2. Run: `npm run run dev`
+  ```sh
+
+  $npm install
+  
+  ```
+
+Run app
+
+  ```sh
+
+  $npm run deev
+
+  ```
+
+Run Build app 
+
+  ```sh
+
+  $npm run build
+
+  ```
