@@ -53,3 +53,6 @@ URL_PLACE_HOLDER="https://jsonplaceholder.typicode.com"
 JWT_TOKEN="sYhIGWiAmP"
 
 ```
+Open documentation: 
+
+https://api-conexa.herokuapp.com/conexa-docs/
