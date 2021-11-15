@@ -126,9 +126,13 @@ export default defineComponent({
           .then((res: ResponseLogin) => {
             const { data } = res.data;
             localStorage.setItem("_token", data.token);
-            router.push({
-              path: "/view",
-            });
+            showMessage("Inicio de sesion exitoso.", "success");
+            setTimeout(() => {
+              isRegister.value = false;
+              router.push({
+                path: "/view",
+              });
+            }, 500);
           })
           .catch((err) => {
             const { response } = err;

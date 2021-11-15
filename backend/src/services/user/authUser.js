@@ -27,7 +27,7 @@ export const authUser = async (userData) => {
       },
       JWT_TOKEN,
       {
-        expiresIn: '2h',
+        expiresIn: "10h"
       },
     );
     user.token = tokenUser;

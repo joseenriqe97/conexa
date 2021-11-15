@@ -26,7 +26,7 @@ const router = Router();
 // Call middlewares
 app.use(
   cors({
-    allowedHeaders: 'origin, content-type, accept, authorization',
+    origin: '*'
   }),
 );
 app.use(express.json({ limit: '50MB' }));
